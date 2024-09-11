@@ -19,7 +19,7 @@ RUN apk add --no-cache msttcorefonts-installer fontconfig
 RUN update-ms-fonts
 
 # Set up the user environment
-ENV NB_USER rjk
+ENV NB_USER nbuser
 ENV NB_UID 1000
 ENV HOME /home/$NB_USER
 

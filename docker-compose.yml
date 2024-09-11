@@ -3,3 +3,5 @@ services:
     build: .
     ports:
       - 8888:8888
+    volumes:
+      - ${HOST_DIR}:/home/nbuser/notebooks
