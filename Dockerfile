@@ -3,12 +3,12 @@ FROM amazoncorretto:22-alpine
 
 ##### ----- DOWNLOAD DEPENDENCIES ----- #####
 RUN apk update && apk upgrade
-RUN apk add py3-pip
+RUN apk add --no-cache py3-pip
 
-RUN apk add make gcc g++ musl-dev linux-headers python3-dev curl git
+RUN apk add --no-cache make gcc g++ musl-dev linux-headers python3-dev curl git
 RUN pip3 install --no-cache-dir jupyter jupyterlab --break-system-packages
 
-RUN apk add nodejs npm
+RUN apk add --no-cache nodejs npm
 
 ##### ----- INSATLL JAVA KERNEL ----- #####
 USER root
@@ -44,9 +44,10 @@ RUN pip install --no-cache-dir --break-system-packages jupyter-c-kernel/
 RUN cd jupyter-c-kernel/jupyter_c_kernel && install_c_kernel --user
 
 
-##### ----- INSTALL NODEJS ----- #####
+##### ----- INSTALL JAVASCRIPT KERNEL ----- #####
 RUN npm install -g ijavascript
 RUN ijsinstall
+
 
 ##### ----- LAUNCH NOTEBOOK ----- #####
 # Launch the notebook server
