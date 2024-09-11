@@ -5,9 +5,10 @@ FROM amazoncorretto:22-alpine
 RUN apk update && apk upgrade
 RUN apk add py3-pip
 
-RUN apk add gcc musl-dev linux-headers python3-dev curl git
+RUN apk add make gcc g++ musl-dev linux-headers python3-dev curl git
 RUN pip3 install --no-cache-dir jupyter jupyterlab --break-system-packages
 
+RUN apk add nodejs npm
 
 ##### ----- INSATLL JAVA KERNEL ----- #####
 USER root
@@ -42,6 +43,10 @@ RUN git clone https://github.com/brendan-rius/jupyter-c-kernel.git
 RUN pip install --no-cache-dir --break-system-packages jupyter-c-kernel/
 RUN cd jupyter-c-kernel/jupyter_c_kernel && install_c_kernel --user
 
+
+##### ----- INSTALL NODEJS ----- #####
+RUN npm install -g ijavascript
+RUN ijsinstall
 
 ##### ----- LAUNCH NOTEBOOK ----- #####
 # Launch the notebook server
