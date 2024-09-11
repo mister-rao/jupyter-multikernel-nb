@@ -1,14 +1,21 @@
 FROM amazoncorretto:22-alpine
 
 
+# Set up the user environment
+ENV NB_USER nbuser
+ENV NB_UID 1000
+ENV HOME /home/$NB_USER
+
+
 ##### ----- DOWNLOAD DEPENDENCIES ----- #####
-RUN apk update && apk upgrade
-RUN apk add --no-cache py3-pip
+RUN apk update && apk upgrade && \
+    apk add --no-cache py3-pip \
+    make gcc g++ musl-dev linux-headers \ 
+    python3-dev curl git nodejs npm \
+    msttcorefonts-installer fontconfig && \
+    pip3 install --no-cache-dir jupyter jupyterlab --break-system-packages && \
+    update-ms-fonts
 
-RUN apk add --no-cache make gcc g++ musl-dev linux-headers python3-dev curl git
-RUN pip3 install --no-cache-dir jupyter jupyterlab --break-system-packages
-
-RUN apk add --no-cache nodejs npm
 
 ##### ----- INSATLL JAVA KERNEL ----- #####
 USER root
@@ -16,14 +23,7 @@ USER root
 RUN curl -L https://github.com/padreati/rapaio-jupyter-kernel/releases/download/2.1.0/rapaio-jupyter-kernel-2.1.0.jar > rapaio-jupyter-kernel-2.1.0.jar
 
 
-RUN apk add --no-cache msttcorefonts-installer fontconfig
-RUN update-ms-fonts
-
-# Set up the user environment
-ENV NB_USER nbuser
-ENV NB_UID 1000
-ENV HOME /home/$NB_USER
-
+##### ----- CREATE USER ----- #####
 RUN adduser --disabled-password \
     --gecos "Default user" \
     --uid $NB_UID \
