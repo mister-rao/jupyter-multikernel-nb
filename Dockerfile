@@ -2,7 +2,7 @@ FROM amazoncorretto:22-alpine
 
 
 # Set up the user environment
-ENV NB_USER nbuser
+ENV NB_USER jovyan
 ENV NB_UID 1000
 ENV HOME /home/$NB_USER
 

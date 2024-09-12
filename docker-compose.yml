@@ -1,5 +1,5 @@
 services:
-  jupyter-nb:
+  jupyter-multi:
     image: jupyter:multi
     container_name: jupyter-mk
     env_file:
@@ -8,4 +8,17 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ${HOST_DIR}:/home/nbuser/notebooks
+      - ${HOST_DIR}:/home/jovyan/notebooks
+
+  jupyter-r:
+    image: jupyter:r-notebook
+    container_name: jupyter-r
+    env_file:
+      - docker.env
+    build:
+      context: .
+      dockerfile: Dockerfile.R
+    ports:
+      - 8888:8888
+    volumes:
+      - ${HOST_DIR}:/home/jovyan/notebooks
