@@ -2,6 +2,32 @@
 
 This repository provides Docker configurations for running Jupyter Notebook environments with support for multiple programming languages and R, facilitating flexible and interactive learning and teaching experiences. The images are available on [Docker Hub](https://hub.docker.com/repository/docker/gprao7/jupyter/general).
 
+
+## Quick Start
+
+Run the below command from the directory that you want to be mounted inside the container.
+
+### 1. Multi Kernel Notebook [Python + Java, C, JavaScript]
+- Windows
+```bash
+   docker run -p 8888:8888 -v ${PWD}:/home/jovyan/notebooks gprao7/jupyter:multi
+   ```
+- Linux/Unix
+```bash
+   docker run -p 8888:8888 -v $(pwd):/home/jovyan/notebooks gprao7/jupyter:multi
+   ```
+
+###  2. R Notebook
+- Windows
+```bash
+   docker run -p 8888:8888 -v ${PWD}:/home/jovyan/notebooks gprao7/jupyter:r-notebook
+   ```
+- Linux/Unix
+```bash
+   docker run -p 8888:8888 -v $(pwd):/home/jovyan/notebooks gprao7/jupyter:r-notebook
+   ```
+
+
 ## Images
 
 1. **`gprao7/jupyter:multi`**  
